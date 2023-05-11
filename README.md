@@ -45,7 +45,7 @@ find_element(driver: WebDriver, value: str, by: str = By.CSS_SELECTOR, innerText
 
 Find a single HTML element within a webdriver page by attribute or criteria and optional inner text filtering, returning the matched WebElement.
 
-### 
+### click
 
 ```python
 click(driver: WebDriver, value: str, by: str = By.CSS_SELECTOR, innerText: str | None = None, retries: int = 3, sleep_between_retries: float = 1) -> None
