@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from time import sleep
 
+from selenium.common import ElementNotInteractableException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
@@ -79,9 +80,10 @@ def find_element(
 
 def click_element_area(driver: WebDriver, element: WebElement) -> None:
     """
-    Click on the element area, even if it is covered by an overlay. This function is useful when dealing
-    with elements obstructed by modal overlays or other overlapping elements, which may cause issues when
-    attempting to interact with the intended element using Selenium.
+    Click on the element area, even if it is covered by an overlay. This function
+    is useful when dealing with elements obstructed by modal overlays or other
+    overlapping elements, which may cause issues when attempting to interact
+    with the intended element using Selenium.
 
     :param driver: A WebDriver instance used to interact with the webpage.
     :param element: A WebElement instance representing the element to be clicked.
@@ -96,9 +98,17 @@ def click_element_area(driver: WebDriver, element: WebElement) -> None:
         rect["y"] + rect["height"] // 2,
     )
 
-    # If an overlay element is found, replace the original element with it
+    # If an overlay element is found
     if overlayElement is not None:
-        element = overlayElement
+        try:
+            # If the overlay element is clickable, click on it
+            overlayElement.click()
+        except ElementNotInteractableException:
+            # Ignore exceptions related to unclickable overlay elements
+            pass
+        else:
+            # If the click on the overlay element succeeds, stop execution
+            return
 
-    # Click the determined element, either the original one or the overlay element
+    # If there's no overlay element, or the overlayElemet is not clickable, click on the given element
     element.click()
