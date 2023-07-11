@@ -40,7 +40,7 @@ Click on the element area, even if it is covered by an overlay. This function is
 ### find_element
 
 ```python
-find_element(driver: WebDriver, value: str, by: str = By.CSS_SELECTOR, innerText: str | None = None) -> WebElement
+find_element(driver: WebDriver | WebElement, value: str, by: str = By.CSS_SELECTOR, innerText: str | None = None) -> WebElement
 ```
 
 Find a single HTML element within a webdriver page by attribute or criteria and optional inner text filtering, returning the matched WebElement.

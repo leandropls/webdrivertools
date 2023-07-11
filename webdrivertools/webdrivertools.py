@@ -48,7 +48,7 @@ def click(
 
 
 def find_element(
-    driver: WebDriver,
+    driver: WebDriver | WebElement,
     value: str,
     by: str = By.CSS_SELECTOR,
     innerText: str | None = None,
@@ -57,7 +57,7 @@ def find_element(
     Find a single HTML element within a webdriver page by attribute or criteria and optional
     inner text filtering and return the matched WebElement.
 
-    :param driver: A WebDriver instance used to navigate and interact with the page
+    :param driver: A WebDriver or WebElement instance used to navigate and interact with the page
     :param value: The attribute value (e.g., CSS selector, xpath, etc.) to use in element search
     :param by: The attribute type used to search for the element (default: By.CSS_SELECTOR)
     :param innerText: Optional, the innerText to filter the elements by (if provided, only elements
